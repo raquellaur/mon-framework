@@ -1,12 +1,8 @@
 <?php
-
-use Framework\App;
-use GuzzleHttp\Psr7\ServerRequest;
-
 require '../vendor/autoload.php';
 
-$app = new App();
-
-$reponse = $app->run(ServerRequest::fromGlobals());
-
-echo $reponse->getBody()->getContents();
+$app = new \Framework\App([
+    \App\Blog\BlogModule::class
+]);
+$response = $app->run(\GuzzleHttp\Psr7\ServerRequest::fromGlobals());
+\Http\Response\send($response);
